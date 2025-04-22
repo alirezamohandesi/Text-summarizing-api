@@ -24,7 +24,7 @@ def summarize_text(data: RequestData):
     response = requests.post(
         url="https://openrouter.ai/api/v1/chat/completions",
         headers={
-            "Authorization": "Bearer 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",
+            "Authorization": "Bearer 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",
             "Content-Type": "application/json",
         },
         data=json.dumps({

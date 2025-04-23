@@ -11,8 +11,10 @@
     <button onclick="summarizeText()">Summarize</button>
     <h2>Summary:</h2>
     <p id="summary"></p>
-    <h2>Word Count:</h2>
-    <p id="wordCount"></p>
+    <h2>Input tokens :</h2>
+    <p id="input"></p>
+        <h2>Output tokens:</h2>
+    <p id="output"></p>
 
     <script>
         async function summarizeText() {
@@ -30,10 +32,12 @@
 
             if (data.error) {
                 document.getElementById("summary").innerText = "Error: " + data.error.message;
-                document.getElementById("wordCount").innerText = "";
+                document.getElementById("input").innerText = "";
+                document.getElementById("output").innerText = "";
             } else {
                 document.getElementById("summary").innerText = data.summary;
-                document.getElementById("wordCount").innerText = data.word_count;
+                document.getElementById("input").innerText = data.input_tok;
+                document.getElementById("output").innerText = data.output_tok;
             }
         }
     </script>

@@ -15,8 +15,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 class RequestData(BaseModel):
     text: str
+
 
 @app.post("/summarize")
 def summarize_text(data: RequestData):
@@ -24,7 +26,7 @@ def summarize_text(data: RequestData):
     response = requests.post(
         url="https://openrouter.ai/api/v1/chat/completions",
         headers={
-            "Authorization": "Bearer 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",
+            "Authorization": "Bearer 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  ",
             "Content-Type": "application/json",
         },
         data=json.dumps({
@@ -39,10 +41,12 @@ def summarize_text(data: RequestData):
     )
 
     if response.status_code == 200:
+        print(json.dumps(response.json() , indent=2))
         result = response.json()["choices"][0]["message"]["content"]
-        word_count = len(result.split(" "))
-        return {"summary": result, "word_count": word_count}
+        token = response.json()["usage"]["prompt_tokens"]
+        tokenout = response.json()["usage"]["completion_tokens"]
+        print(f"Token number: {token}")
+
+        return {"summary": result, "input_tok": token , "output_tok":tokenout}
     else:
         return {"error": response.json()}
-
-

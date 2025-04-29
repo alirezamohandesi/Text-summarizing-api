@@ -22,19 +22,19 @@ class RequestData(BaseModel):
 
 @app.post("/summarize")
 def summarize_text(data: RequestData):
-    print("sdf")
+    print(data.text)
     response = requests.post(
         url="https://openrouter.ai/api/v1/chat/completions",
         headers={
-            "Authorization": "Bearer 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  ",
+            "Authorization": "Bearer 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  ",
             "Content-Type": "application/json",
         },
         data=json.dumps({
-            "model": "google/gemma-3-1b-it:free",
+            "model": "meta-llama/llama-3.1-8b-instruct:free",
             "messages": [
                 {
                     "role": "user",
-                    "content": f"summarize this text: \n\n{data.text}"
+                    "content": f"summarize this text: \n{data.text}"
                 }
             ],
         })
